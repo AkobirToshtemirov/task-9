@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    active: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+      name: test-YAML
+      environment: testing
+      enabled: false
+      servers:
+        - www.abc.test.com
+        - www.xyz.test.com
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  #    username: username
+  #    password: password
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+      name: prod-YAML
+      environment: production
+      enabled: true
+      servers:
+        - www.abc.com
+        - www.xyz.com
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pdp
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: dev3469
